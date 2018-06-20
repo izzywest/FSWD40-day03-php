@@ -27,37 +27,34 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
            
     <!-- Content after login here -->
 
-    <h1>Book a car here</h1>
-    
-    <br>
-<form action="home.php" method="GET">
-Database: <input type="text" name="database1" />
-<br>
-Table: <input type="text" name="table1" />
-<br>
-<br>
-<input type="submit" name="submit" />
-</form>
-<br>
+<div class="card" style="width: 70%;">
+<div class="card-body">
+<h5 class="card-title">Book a car here</h5>
+<img class="card-img-top" src="car.png" style="width: 15%; padding-bottom: 20px;" alt="Card image cap">
+<h6 class="card-subtitle mb-2 text-muted">Select a database and table</h6>
+<form action="home.php" method="GET">Database: <input class="form-control" style="width: 100%; "type="text" name="database1" />
+Table: <input class="form-control" style="width: 100%; type="text" name="table1" /><br><br>
+<input class="btn btn-primary"  type="submit" name="submit" /></form>  </div>
+</div>
+
 <?php
 $dbname = mysqli_real_escape_string($conn, $_GET['database1']);
 $table1 = mysqli_real_escape_string($conn, $_GET['table1']);
 
-
 if(isset($_GET["submit"])) {
-    
+
 $sql = "SELECT userId, userName, userEmail, userPass FROM `$table1`";
 $result = mysqli_query($conn, $sql);
 // fetch a next row (as long as there are some) into $row
 while($row = mysqli_fetch_assoc($result)) {
-       printf("ID=%s // Last Name: %s // First Name: %s<br>",
+       printf("ID=%s Last Name: %s // First Name: %s<br>",
                      $row["userId"], $row["userName"],$row["userEmail"]);
 }
 echo "<br>";
 }
 
 ?>
-    </div>
+</div>
 </body>
 </html>
 <?php ob_end_flush(); ?>
